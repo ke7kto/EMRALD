@@ -188,7 +188,14 @@ namespace ScriptEngineNS
         string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         if (!added.Contains(addLib))
         {
-          references.Add(MetadataReference.CreateFromFile(appPath + Path.DirectorySeparatorChar + addLib));
+          if (appPath != "")
+          {
+            references.Add(MetadataReference.CreateFromFile(appPath + Path.AltDirectorySeparatorChar + addLib));
+          }
+          else
+          {
+            references.Add(MetadataReference.CreateFromFile(addLib));
+          }
         }      
       }     
 
